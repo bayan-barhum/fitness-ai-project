@@ -1,0 +1,175 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+}
+
+.screen {
+    text-align: center;
+    max-width: 800px;
+    padding: 40px;
+    background-color: #1e1e1e;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #4fc3f7;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #81c784;
+}
+
+h3 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #bdbdbd;
+}
+
+.description {
+    margin-bottom: 40px;
+}
+
+.how-it-works {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.step-number {
+    background-color: #4fc3f7;
+    color: #121212;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.feature-card {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card h4 {
+    color: #4fc3f7;
+    margin-bottom: 10px;
+}
+
+.btn {
+    background-color: #4fc3f7;
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+}
+
+.btn:hover {
+    background-color: #29b6f6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 195, 247, 0.4);
+}
+
+.btn.secondary {
+    background-color: #666666;
+}
+
+.btn.secondary:hover {
+    background-color: #888888;
+}
+
+.exercise-btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #bdbdbd;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #666666;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    font-size: 1em;
+}
+
+.camera-preview {
+    width: 100%;
+    height: 200px;
+    background-color: #2a2a2a;
+    border: 2px dashed #666666;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #666666;
+}
+
+.feedback {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.feedback p {
+    margin: 5px 0;
+}
+
+.hidden {
+    display: none;
+}

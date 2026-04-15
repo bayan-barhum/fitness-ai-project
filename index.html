@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fitness Coach</title>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div id="home-screen" class="screen">
+        <h1>AI Fitness Coach</h1>
+        <h2>Train with AI precision</h2>
+        <p class="description">This app helps users train with proper form using AI-based pose detection and real-time feedback.</p>
+        
+        <div class="how-it-works">
+            <h3>How it works</h3>
+            <div class="step">
+                <div class="step-number">1</div>
+                <p>Choose an exercise</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <p>Set your training (sets & reps)</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <p>Train with camera feedback</p>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h4>Real-time feedback</h4>
+                <p>Get instant corrections on your form.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Exercise tracking</h4>
+                <p>Monitor your progress over time.</p>
+            </div>
+            <div class="feature-card">
+                <h4>AI pose detection</h4>
+                <p>Advanced AI analyzes your movements.</p>
+            </div>
+        </div>
+        
+        <button id="start-training-btn" class="btn">Start Training</button>
+    </div>
+
+    <div id="exercise-screen" class="screen hidden">
+        <h1>Choose Exercise</h1>
+        <button class="btn exercise-btn" data-exercise="Squat">Squat</button>
+        <button class="btn exercise-btn" data-exercise="Push-up">Push-up</button>
+        <button class="btn exercise-btn" data-exercise="Plank">Plank</button>
+        <button class="btn exercise-btn" data-exercise="Lunge">Lunge</button>
+        <button class="btn exercise-btn" data-exercise="Bicep Curl">Bicep Curl</button>
+        <button id="back-btn" class="btn secondary">Back</button>
+    </div>
+
+    <div id="setup-screen" class="screen hidden">
+        <h1 id="exercise-title">Exercise Setup</h1>
+        <div class="input-group">
+            <label for="sets">Number of sets:</label>
+            <input type="number" id="sets" value="3" min="1">
+        </div>
+        <div class="input-group">
+            <label for="reps">Number of reps:</label>
+            <input type="number" id="reps" value="10" min="1">
+        </div>
+        <div class="camera-preview">
+            Camera Preview (Placeholder)
+        </div>
+        <div class="feedback">
+            <h3>Feedback</h3>
+            <p>Keep your back straight</p>
+            <p>Good form</p>
+        </div>
+        <button id="start-training-setup-btn" class="btn">Start Training</button>
+        <button id="back-to-exercise-btn" class="btn secondary">Back</button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
