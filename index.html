@@ -10,7 +10,7 @@
     <div id="home-screen" class="screen">
         <h1>AI Fitness Coach</h1>
         <h2>Train with AI precision</h2>
-        <p class="description">This app helps users train with proper form using AI-based pose detection and real-time feedback.</p>
+        <p class="description">Train smarter with real-time AI feedback.</p>
         
         <div class="how-it-works">
             <h3>How it works</h3>
@@ -25,21 +25,6 @@
             <div class="step">
                 <div class="step-number">3</div>
                 <p>Train with camera feedback</p>
-            </div>
-        </div>
-        
-        <div class="features">
-            <div class="feature-card">
-                <h4>Real-time feedback</h4>
-                <p>Get instant corrections on your form.</p>
-            </div>
-            <div class="feature-card">
-                <h4>Exercise tracking</h4>
-                <p>Monitor your progress over time.</p>
-            </div>
-            <div class="feature-card">
-                <h4>AI pose detection</h4>
-                <p>Advanced AI analyzes your movements.</p>
             </div>
         </div>
         
@@ -72,17 +57,17 @@
 
     <div id="training-screen" class="hidden">
         <video id="camera-preview" class="camera-preview" autoplay muted playsinline></video>
-        <div class="overlay top-left">
+        <div class="overlay top-center">
             <h1 id="training-exercise-title">Training</h1>
+        </div>
+        <div class="overlay top-left-btn">
+            <button id="end-session-btn" class="btn icon-btn">←</button>
+        </div>
+        <div class="overlay top-right-btn">
+            <button id="switch-camera-btn" class="btn icon-btn">⟳</button>
         </div>
         <div class="overlay bottom-center">
             <div id="training-feedback" class="training-feedback">Keep your back straight</div>
-        </div>
-        <div class="overlay bottom-right">
-            <button id="switch-camera-btn" class="btn secondary small">Switch Camera</button>
-        </div>
-        <div class="overlay bottom-left">
-            <button id="end-session-btn" class="btn secondary small">End Session</button>
         </div>
     </div>
 

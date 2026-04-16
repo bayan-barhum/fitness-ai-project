@@ -14,7 +14,7 @@ body {
 .screen {
     text-align: center;
     max-width: 800px;
-    padding: 40px;
+    padding: 20px;
     background-color: #1e1e1e;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -23,42 +23,47 @@ body {
 
 h1 {
     font-size: 2.5em;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: #4fc3f7;
 }
 
 h2 {
     font-size: 1.5em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #81c784;
 }
 
 h3 {
     font-size: 1.3em;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #ffffff;
 }
 
 p {
     font-size: 1.1em;
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #bdbdbd;
 }
 
 .description {
-    margin-bottom: 40px;
+    margin-bottom: 15px;
+    font-size: 1em;
 }
 
 .how-it-works {
     text-align: left;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
 }
 
 .step {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
+}
+
+.step p {
+    margin-bottom: ;
 }
 
 .step-number {
@@ -75,22 +80,11 @@ p {
 }
 
 .features {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 40px;
+    display: none;
 }
 
 .feature-card {
-    background-color: #2a2a2a;
-    padding: 20px;
-    border-radius: 10px;
-    width: 30%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.feature-card h4 {
-    color: #4fc3f7;
-    margin-bottom: 10px;
+    display: none;
 }
 
 .btn {
@@ -137,7 +131,7 @@ p {
 }
 
 .input-group input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     border: 1px solid #666666;
     border-radius: 5px;
@@ -156,17 +150,22 @@ p {
     z-index: 1;
 }
 
+.mirror {
+    transform: scaleX(-1);
+}
+
 .overlay {
     position: fixed;
     z-index: 2;
 }
 
-.overlay.top-left {
+.overlay.top-center {
     top: 20px;
-    left: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.overlay.top-left h1 {
+.overlay.top-center h1 {
     font-size: 1.2em;
     color: #ffffff;
     margin: 0;
@@ -174,9 +173,11 @@ p {
 }
 
 .overlay.bottom-center {
-    bottom: 20px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
 }
 
 .overlay.bottom-center .training-feedback {
@@ -185,18 +186,44 @@ p {
     border-radius: 20px;
     color: #ffffff;
     font-size: 1em;
+    max-width: 80vw;
     text-align: center;
     margin: 0;
 }
 
-.overlay.bottom-right {
-    bottom: 20px;
+.overlay.top-right-btn {
+    top: 20px;
     right: 20px;
 }
 
-.overlay.bottom-left {
-    bottom: 20px;
+.overlay.top-left-btn {
+    top: 20px;
     left: 20px;
+}
+
+.btn.icon-btn {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    margin: 0;
+}
+
+.btn.icon-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
 }
 
 .btn.small {
