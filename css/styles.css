@@ -154,6 +154,10 @@ p {
     transform: scaleX(-1);
 }
 
+#pose-canvas.mirror {
+    transform: scaleX(-1);
+}
+
 .overlay {
     position: fixed;
     z-index: 2;
@@ -257,6 +261,16 @@ p {
 
 .feedback p {
     margin: 5px 0;
+}
+
+#pose-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .hidden {

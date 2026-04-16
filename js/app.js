@@ -12,6 +12,8 @@ const trainingTitle = document.getElementById('training-exercise-title');
 const trainingFeedback = document.getElementById('training-feedback');
 const exerciseBtns = document.querySelectorAll('.exercise-btn');
 const cameraPreview = document.getElementById('camera-preview');
+const setsInput = document.getElementById('sets');
+const repsInput = document.getElementById('reps');
 
 let selectedExercise = '';
 let currentStream = null;
@@ -19,6 +21,7 @@ let currentFacingMode = 'environment'; // Start with rear camera for better pose
 let currentScreen = 'home';
 let videoDevices = [];
 let currentCameraIndex = 0;
+let exerciseSettings = {};
 
 history.replaceState({ screen: 'home' }, '');
 
@@ -116,8 +119,10 @@ async function openCamera() {
         const currentDeviceLabel = videoDevices[currentCameraIndex]?.label?.toLowerCase() || '';
         if (currentDeviceLabel.includes('front') || currentDeviceLabel.includes('user') || currentDeviceLabel.includes('selfie')) {
             cameraPreview.classList.add('mirror');
+            canvasElement.classList.add('mirror');
         } else {
             cameraPreview.classList.remove('mirror');
+            canvasElement.classList.remove('mirror');
         }
         
         // Apply advanced zoom constraint if supported
@@ -171,11 +176,19 @@ async function switchCamera() {
 }
 
 function beginTraining() {
+    // Ensure exercise settings are saved before training
+    if (selectedExercise && exerciseSettings[selectedExercise]) {
+        exerciseSettings[selectedExercise].sets = parseInt(setsInput.value, 10) || 3;
+        exerciseSettings[selectedExercise].reps = parseInt(repsInput.value, 10) || 10;
+    }
+    
     trainingTitle.textContent = `${selectedExercise} Training`;
     showScreen(trainingScreen);
     // Load video devices before opening camera
     loadVideoDevices().then(() => {
         openCamera();
+        initPose();
+        startPoseDetection();
     });
     history.pushState({ screen: 'training' }, '');
 }
@@ -194,9 +207,32 @@ exerciseBtns.forEach((btn) => {
     btn.addEventListener('click', (event) => {
         selectedExercise = event.target.dataset.exercise;
         exerciseTitle.textContent = `${selectedExercise} Setup`;
+        
+        // Initialize exercise settings if not exists
+        if (!exerciseSettings[selectedExercise]) {
+            exerciseSettings[selectedExercise] = { sets: 3, reps: 10 };
+        }
+        
+        // Load saved values into inputs
+        setsInput.value = exerciseSettings[selectedExercise].sets;
+        repsInput.value = exerciseSettings[selectedExercise].reps;
+        
         showScreen(setupScreen);
         history.pushState({ screen: 'setup' }, '');
     });
+});
+
+// Add event listeners to save input changes
+setsInput.addEventListener('input', (event) => {
+    if (selectedExercise && exerciseSettings[selectedExercise]) {
+        exerciseSettings[selectedExercise].sets = parseInt(event.target.value, 10) || 1;
+    }
+});
+
+repsInput.addEventListener('input', (event) => {
+    if (selectedExercise && exerciseSettings[selectedExercise]) {
+        exerciseSettings[selectedExercise].reps = parseInt(event.target.value, 10) || 1;
+    }
 });
 
 backToExerciseBtn.addEventListener('click', () => {
@@ -214,6 +250,17 @@ endSessionBtn.addEventListener('click', () => {
 const startTrainingBtn = document.getElementById('start-training-setup-btn');
 startTrainingBtn.addEventListener('click', beginTraining);
 
+// Initialize exercise settings on page load
+window.addEventListener('DOMContentLoaded', () => {
+    // Pre-initialize common exercises
+    const exercises = ['Squat', 'Push-up', 'Plank', 'Lunge', 'Bicep Curl'];
+    exercises.forEach(exercise => {
+        if (!exerciseSettings[exercise]) {
+            exerciseSettings[exercise] = { sets: 3, reps: 10 };
+        }
+    });
+});
+
 window.onpopstate = function(event) {
     if (event.state && event.state.screen) {
         const targetScreen = event.state.screen;
@@ -227,11 +274,65 @@ window.onpopstate = function(event) {
             showScreen(trainingScreen);
             loadVideoDevices().then(() => {
                 openCamera();
-            });
-        }
+                initPose();
+                startPoseDetection();
+    });
+}
         // Stop camera if not on training screen
         if (targetScreen !== 'training') {
             stopCamera();
         }
     }
 };
+
+let pose;
+let canvasElement = document.getElementById('pose-canvas');
+let canvasCtx = canvasElement.getContext('2d');
+
+function initPose() {
+    pose = new Pose({
+        locateFile: (file) => {
+            return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+        }
+    });
+
+    pose.setOptions({
+        modelComplexity: 0,
+        smoothLandmarks: true,
+        enableSegmentation: false,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5
+    });
+
+    pose.onResults(onPoseResults);
+}
+
+function onPoseResults(results) {
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+    canvasElement.width = window.innerWidth;
+    canvasElement.height = window.innerHeight;
+
+    if (results.poseLandmarks) {
+        drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, {
+            color: '#f9f9f9',
+            lineWidth: 3
+        });
+
+        drawLandmarks(canvasCtx, results.poseLandmarks, {
+            color: '#465ee4',
+            lineWidth: 2
+        });
+    }
+}
+
+function startPoseDetection() {
+    async function detect() {
+        if (pose && cameraPreview.readyState >= 2) {
+            await pose.send({ image: cameraPreview });
+        }
+        requestAnimationFrame(detect);
+    }
+    detect();
+}      
+    
